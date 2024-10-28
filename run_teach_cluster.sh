@@ -26,6 +26,6 @@ LOGS="./build/logs/"
 
 mkdir $LOGS
 
-$BINPATH/vec_add_vec   --benchmark_perf_counters="L1-dcache-load-misses,L1-dcache-loads" --benchmark_format=csv --benchmark_out_format=csv  --benchmark_out=$LOGS/vec_add.csv
+$BINPATH/vec_mul_vec   --benchmark_perf_counters="L1-dcache-load-misses,L1-dcache-loads" --benchmark_format=csv --benchmark_out_format=csv  --benchmark_out=$LOGS/vec_add.csv
 
 ###  plotting: add your plots here if needed

@@ -124,7 +124,6 @@ namespace swiftware::hpp {
       c[i] = a[i] * b[i];
     }
   }
-}
 
 void vec_mul_unrolled_sse(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
   int n = a.size();
