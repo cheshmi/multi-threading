@@ -121,7 +121,7 @@ namespace swiftware::hpp {
     int n = a.size();
     c.resize(n);
     auto bnd1 = n - n % 8;
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(8)
     for (int i = 0; i < bnd1; i+=8) {
       auto a_vec = _mm256_loadu_ps(&a[i]);
       auto b_vec = _mm256_loadu_ps(&b[i]);
