@@ -11,7 +11,6 @@ namespace swiftware::hpp {
 
   void vec_mul(std::vector<float> a, std::vector<float> b, std::vector<float> &c) {
     int n = a.size();
-    c.resize(n);
     for (int i = 0; i < n; ++i) {
       c[i] = a[i] * b[i];
     }
@@ -20,7 +19,6 @@ namespace swiftware::hpp {
 
   void vec_mul_unrolled8_scalarized(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
     int n = a.size();
-    c.resize(n);
     auto bnd1 = n - n % 8;
     for (int i = 0; i < bnd1; i+=8) {
       auto a0 = a[i];
@@ -55,7 +53,6 @@ namespace swiftware::hpp {
 #ifdef __AVX__
   void vec_mul_unrolled_avx(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
     int n = a.size();
-    c.resize(n);
     auto bnd1 = n - n % 8;
     for (int i = 0; i < bnd1; i+=8) {
       auto a_vec = _mm256_loadu_ps(&a[i]);
@@ -74,7 +71,6 @@ namespace swiftware::hpp {
 
   void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float> &c) {
     int n = a.size();
-    c.resize(n);
     #pragma omp parallel for
     for (int i = 0; i < n; ++i) {
       c[i] = a[i] * b[i];
@@ -83,7 +79,6 @@ namespace swiftware::hpp {
 
   void vec_mul_unrolled8_scalarized_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
     int n = a.size();
-    c.resize(n);
     auto bnd1 = n - n % 8;
     #pragma omp parallel for
     for (int i = 0; i < bnd1; i+=8) {
@@ -119,7 +114,6 @@ namespace swiftware::hpp {
 #ifdef __AVX__
   void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
     int n = a.size();
-    c.resize(n);
     auto bnd1 = n - n % 8;
     #pragma omp parallel for num_threads(8)
     for (int i = 0; i < bnd1; i+=8) {

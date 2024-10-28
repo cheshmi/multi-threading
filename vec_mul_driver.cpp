@@ -33,7 +33,7 @@ BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_vec_mul, swiftware::hpp::vec_m
 BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_vec_mul, swiftware::hpp::vec_mul_unrolled_avx)->Args({2048})->Args({4096})->Args({8192});
 #endif
 
-BENCHMARK_CAPTURE(BM_VECMUL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Args({2048})->Args({4096})->Args({8192})->Threads(8)->UseRealTime();
+BENCHMARK_CAPTURE(BM_VECMUL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Args({2048})->Args({4096})->Args({8192})->MeasureProcessCPUTime();
 BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Args({2048})->Args({4096})->Args({8192});
 #ifdef __AVX__
 BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled_avx_parallel)->Args({2048})->Args({4096})->Args({8192});
