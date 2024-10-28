@@ -35,6 +35,8 @@ endif()
 FetchContent_MakeAvailable(googlebenchmark)
 
 
+project(multithreading C CXX )
+
 # find openmp
 find_package(OpenMP REQUIRED)
 
@@ -42,7 +44,6 @@ find_package(OpenMP REQUIRED)
 include_directories(
         ${CMAKE_SOURCE_DIR}/include)
 
-project(multithreading)
 
 set(CMAKE_CXX_STANDARD 17)
 

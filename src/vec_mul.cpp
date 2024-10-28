@@ -117,10 +117,11 @@ namespace swiftware::hpp {
     }
   }
 #ifdef __AVX__
-  void vec_mul_unrolled_avx(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
+  void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
     int n = a.size();
     c.resize(n);
     auto bnd1 = n - n % 8;
+    #pragma omp parallel for
     for (int i = 0; i < bnd1; i+=8) {
       auto a_vec = _mm256_loadu_ps(&a[i]);
       auto b_vec = _mm256_loadu_ps(&b[i]);
