@@ -8,8 +8,8 @@
 #include "vec_mul.h"
 
 
-static void BM_VECADD(benchmark::State &state,
-                    void (*vecImpl1)(std::vector<float> a, std::vector<float> b, std::vector<float> &c)) {
+static void BM_VECMUL(benchmark::State &state,
+                      void (*vecImpl1)(std::vector<float> a, std::vector<float> b, std::vector<float> &c)) {
   int m = state.range(0);
   std::vector<float> A(m);
   std::vector<float> B(m);
@@ -27,18 +27,18 @@ static void BM_VECADD(benchmark::State &state,
 
 }
 
-BENCHMARK_CAPTURE(BM_VECADD, baseline_vec_add, swiftware::hpp::vec_mul)->Args({2048})->Args({4096})->Args({8192});
-
-BENCHMARK_CAPTURE(BM_VECADD, unrolled_vec_add, swiftware::hpp::vec_mul_unrolled)->Args({2048})->Args({4096})->Args({8192});
-BENCHMARK_CAPTURE(BM_VECADD, unrolled_scalarized_vec_add, swiftware::hpp::vec_mul_unrolled_scalarized)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, baseline_vec_mul, swiftware::hpp::vec_mul)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized)->Args({2048})->Args({4096})->Args({8192});
 #ifdef __AVX__
-BENCHMARK_CAPTURE(BM_VECADD, vec_add_unrolled_sse, swiftware::hpp::vec_mul_unrolled_sse)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_vec_mul, swiftware::hpp::vec_mul_unrolled_avx)->Args({2048})->Args({4096})->Args({8192});
 #endif
 
-BENCHMARK_CAPTURE(BM_VECADD, unrolled8_vec_add, swiftware::hpp::vec_mul_unrolled8)->Args({2048})->Args({4096})->Args({8192});
-BENCHMARK_CAPTURE(BM_VECADD, unrolled8_scalarized_vec_add, swiftware::hpp::vec_mul_unrolled8_scalarized)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Args({2048})->Args({4096})->Args({8192});
 #ifdef __AVX__
-BENCHMARK_CAPTURE(BM_VECADD, unrolled_avx_vec_add, swiftware::hpp::vec_mul_unrolled_avx)->Args({2048})->Args({4096})->Args({8192});
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled_avx_parallel)->Args({2048})->Args({4096})->Args({8192});
 #endif
+
+
 
 BENCHMARK_MAIN();

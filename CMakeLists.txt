@@ -35,6 +35,8 @@ endif()
 FetchContent_MakeAvailable(googlebenchmark)
 
 
+# find openmp
+find_package(OpenMP REQUIRED)
 
 
 include_directories(
@@ -49,4 +51,6 @@ add_executable(vec_mul_vec
         ${CMAKE_SOURCE_DIR}/src/vec_mul.cpp
 )
 target_link_libraries(vec_mul_vec
-        benchmark::benchmark )
+        benchmark::benchmark 
+        OpenMP::OpenMP_CXX
+)

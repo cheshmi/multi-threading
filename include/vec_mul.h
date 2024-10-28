@@ -15,18 +15,15 @@ namespace swiftware::hpp {
   /// \param c The result vector
   void vec_mul(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
 
-  void vec_mul_unrolled(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
-
-  void vec_mul_unrolled_scalarized(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
-
-  void vec_mul_unrolled_sse(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
-
-  void vec_mul_unrolled8(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
-
   void vec_mul_unrolled8_scalarized(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
 
   void vec_mul_unrolled_avx(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
 
+  void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
+
+  void vec_mul_unrolled8_scalarized_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
+
+  void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
 }
 
 #endif //VECTORIZATION_VEC_MUL_H
