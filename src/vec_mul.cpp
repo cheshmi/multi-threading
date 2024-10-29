@@ -69,18 +69,18 @@ namespace swiftware::hpp {
 // Parallel code
 
 
-  void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float> &c) {
+  void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float> &c, int num_threads=8) {
     int n = a.size();
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(num_threads)
     for (int i = 0; i < n; ++i) {
       c[i] = a[i] * b[i];
     }
   }
 
-  void vec_mul_unrolled8_scalarized_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
+  void vec_mul_unrolled8_scalarized_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c, int num_threads=8){
     int n = a.size();
     auto bnd1 = n - n % 8;
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(num_threads)
     for (int i = 0; i < bnd1; i+=8) {
       auto a0 = a[i];
       auto a1 = a[i+1];
@@ -112,10 +112,10 @@ namespace swiftware::hpp {
     }
   }
 #ifdef __AVX__
-  void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c){
+  void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c, int num_threads=8){
     int n = a.size();
     auto bnd1 = n - n % 8;
-    #pragma omp parallel for num_threads(8)
+    #pragma omp parallel for num_threads(num_threads)
     for (int i = 0; i < bnd1; i+=8) {
       auto a_vec = _mm256_loadu_ps(&a[i]);
       auto b_vec = _mm256_loadu_ps(&b[i]);
