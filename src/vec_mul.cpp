@@ -71,7 +71,7 @@ namespace swiftware::hpp {
 
   void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float> &c, int num_threads=8) {
     int n = a.size();
-    #pragma omp parallel for num_threads(num_threads)
+#pragma omp parallel for num_threads(num_threads)
     for (int i = 0; i < n; ++i) {
       c[i] = a[i] * b[i];
     }
