@@ -5,7 +5,7 @@
 #SBATCH --export=ALL
 #SBATCH --job-name="vectut"
 #SBATCH --nodes=1
-#SBATCH --output="vectut.%j.%N.out"
+#SBATCH --output="multithreadtut.%j.%N.out"
 #SBATCH -t 00:15:00
 ##################### SLURM (do not change) ^  #####################
 

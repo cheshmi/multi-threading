@@ -52,50 +52,19 @@ static void BM_VECMUL_PARALLEL(benchmark::State &state,
     }
 }
 
-BENCHMARK_CAPTURE(BM_VECMUL, baseline_vec_mul, swiftware::hpp::vec_mul)->Ranges({{2<<19, 2<<20}});
-//BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized)->Ranges({{2<<10, 2<<18}});
-//#ifdef __AVX__
-//BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_vec_mul, swiftware::hpp::vec_mul_unrolled_avx)->Ranges({{2<<10, 2<<18}});
-//#endif
+BENCHMARK_CAPTURE(BM_VECMUL, baseline_vec_mul, swiftware::hpp::vec_mul)->Ranges({{2<<18, 2<<20}});
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized)->Ranges({{2<<18, 2<<20}});
+#ifdef __AVX__
+BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_vec_mul, swiftware::hpp::vec_mul_unrolled_avx)->Ranges({{2<<18, 2<<20}});
+#endif
 
-BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Ranges({{2<<19, 2<<20}, {4, 8}})->UseManualTime();
-//BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Ranges({{2<<10, 2<<18}, {2, 12}});
-//#ifdef __AVX__
-//BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled_avx_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled_avx_parallel)->Ranges({{2<<10, 2<<18}, {2, 12}});
-//#endif
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
+#ifdef __AVX__
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled_avx_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled_avx_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
+#endif
 
 
 //
 BENCHMARK_MAIN();
 
-//int main(int argc, char **argv) {
-//    int num_runs = 50;
-//    for (auto m : {2<<22, 2<<24}) {
-//        std::cout<<"Benchmarking for m = "<<m<<std::endl;
-//        std::vector<float> A(m);
-//        std::vector<float> B(m);
-//        std::vector<float> C(m);
-//        for (int i = 0; i < m; ++i) {
-//            A[i] = 1.0;
-//        }
-//        for (int i = 0; i < m; ++i) {
-//            B[i] = 1.0;
-//        }
-//        auto start = omp_get_wtime();
-//        for (int i = 0; i < num_runs; ++i) {
-//            swiftware::hpp::vec_mul(A, B, C);
-//        }
-//        auto end = omp_get_wtime();
-//        std::cout << "Time for vec_mul: " << end - start << " ms" << std::endl;
-//
-//        start = omp_get_wtime();
-//        for (int i = 0; i < num_runs; ++i) {
-//            swiftware::hpp::vec_mul_parallel(A, B, C, num_teach_threads);
-//        }
-//        end = omp_get_wtime();
-//        std::cout << "Time for vec_mul_parallel: " << end - start << " ms" << std::endl;
-//    }
-//
-//
-//    return 0;
-//}
