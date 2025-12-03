@@ -58,8 +58,10 @@ BENCHMARK_CAPTURE(BM_VECMUL, unrolled8_scalarized_vec_mul, swiftware::hpp::vec_m
 BENCHMARK_CAPTURE(BM_VECMUL, unrolled_avx_vec_mul, swiftware::hpp::vec_mul_unrolled_avx)->Ranges({{2<<18, 2<<20}});
 #endif
 
-BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
-BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime()->Unit(benchmark::kMicrosecond)->Iterations(1)->Repetitions(10);
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime()->Unit(benchmark::kMicrosecond)->Iterations(1)->Repetitions(10);
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, parallel_vec_mul, swiftware::hpp::vec_mul_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->Unit(benchmark::kMicrosecond)->Iterations(1)->Repetitions(10);
+BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled8_scalarized_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled8_scalarized_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->Unit(benchmark::kMicrosecond)->Iterations(1)->Repetitions(10);
 #ifdef __AVX__
 BENCHMARK_CAPTURE(BM_VECMUL_PARALLEL, unrolled_avx_parallel_vec_mul, swiftware::hpp::vec_mul_unrolled_avx_parallel)->Ranges({{2<<18, 2<<20}, {4, 8}})->UseManualTime();
 #endif

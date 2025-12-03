@@ -22,7 +22,7 @@ include(FetchContent)
 FetchContent_Declare(
         googlebenchmark
         GIT_REPOSITORY https://github.com/google/benchmark.git
-        GIT_TAG v1.9.0
+        GIT_TAG v1.9.4
 )
 # enable BENCHMARK_DOWNLOAD_DEPENDENCIES
 set(BENCHMARK_DOWNLOAD_DEPENDENCIES ON)
@@ -34,6 +34,13 @@ endif()
 
 
 FetchContent_MakeAvailable(googlebenchmark)
+
+
+
+
+# enable google test
+set(BENCHMARK_ENABLE_TESTS ON)
+set(BENCHMARK_ENABLE_GTEST_TESTS ON)
 
 
 project(multithreading C CXX )

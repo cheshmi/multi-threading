@@ -2,11 +2,14 @@
 
 ##################### SLURM (do not change) v  #####################
 #SBATCH --export=ALL
-#SBATCH --job-name="vectut"
+#SBATCH --job-name="mt"
 #SBATCH --nodes=1
-#SBATCH --output="multithreadtut.%j.%N.out"
-#SBATCH -t 00:15:00
+#SBATCH --output="mt.%j.%N.out"
+#SBATCH -t 00:25:00
 ##################### SLURM (do not change) ^  #####################
+
+# Above are SLURM directives for job scheduling on a cluster,
+export SLURM_CONF=/etc/slurm/slurm.conf
 
 
 echo "----- Building -----"
@@ -22,22 +25,8 @@ cmake --build $(pwd)/build -- -j8
 
 
 
+echo "---- Running CPU ----"
 
-######### NOTE: run this script with sbatch command #############
+mkdir -p $(pwd)/logs
+$(pwd)/build/vec_mul_vec --benchmark_out="$(pwd)/logs/mt.json" --benchmark_out_format=json 
 
-
-### set it to to run you compiled code on the compute nodes.
-
-
-
-
-#BINPATH=./build/
-#LOGS="./build/logs/"
-#LOGS="./build/logs-${DATE}/"
-
-
-#mkdir $LOGS
-
-#$BINPATH/vec_mul_vec   --benchmark_perf_counters="L1-dcache-load-misses,L1-dcache-loads" --benchmark_format=csv --benchmark_out_format=csv  --benchmark_out=$LOGS/vec_add.csv
-
-###  plotting: add your plots here if needed
