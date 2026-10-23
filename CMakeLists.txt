@@ -1,6 +1,6 @@
 # Created by SwiftWare Lab on 9/24.
 # CE 4SP4 - High Performance Programming
-# Copyright (c) 2024 SwiftWare Lab
+# Copyright (c) 2026 SwiftWare Lab
 
 cmake_minimum_required(VERSION 3.18)
 
