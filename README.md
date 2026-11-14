@@ -14,6 +14,14 @@ Use``ssh <username>@srv-cad.ece.mcmaster.ca`` to login to the server.
 * Use `sbatch build_run.sh` to run the code on a compute node of the teach cluster.
 * The script runs both examples and generates performance benchmarks.
 
+**Tip:** By default, Slurm gives the job a single CPU core, so all OpenMP threads share that core and the
+parallel code runs no faster than the serial code. Request all 8 cores of the compute node when submitting:
+```
+sbatch -c 8 build_run.sh
+```
+`-c 8` is short for `--cpus-per-task=8`. Each compute node has 8 cores available to Slurm, so 8 is the maximum;
+running more than 8 threads puts several threads on the same core.
+
 # Multi-Threading Examples
 
 ### 1. Vector Multiplication (vec_mul)

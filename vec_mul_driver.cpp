@@ -12,7 +12,7 @@
 int num_teach_threads = 8;
 
 static void BM_VECMUL(benchmark::State &state,
-                      void (*vecImpl1)(std::vector<float> a, std::vector<float> b, std::vector<float> &c)) {
+                      void (*vecImpl1)(const std::vector<float>& a, const std::vector<float>& b, std::vector<float> &c)) {
     int m = state.range(0);
     std::vector<float> A(m);
     std::vector<float> B(m);
@@ -31,7 +31,7 @@ static void BM_VECMUL(benchmark::State &state,
 
 
 static void BM_VECMUL_PARALLEL(benchmark::State &state,
-                               void (*vecImpl1)(std::vector<float> a, std::vector<float> b, std::vector<float> &c, int num_threads)) {
+                               void (*vecImpl1)(const std::vector<float>& a, const std::vector<float>& b, std::vector<float> &c, int num_threads)) {
     int m = state.range(0);
     int num_threads = state.range(1);
     std::vector<float> A(m);
