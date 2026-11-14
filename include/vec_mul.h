@@ -13,17 +13,17 @@ namespace swiftware::hpp {
   /// \param a The first vector
   /// \param b The second vector
   /// \param c The result vector
-  void vec_mul(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
+  void vec_mul(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c);
 
-  void vec_mul_unrolled8_scalarized(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
+  void vec_mul_unrolled8_scalarized(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c);
 
-  void vec_mul_unrolled_avx(std::vector<float> a, std::vector<float> b, std::vector<float>& c);
+  void vec_mul_unrolled_avx(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c);
 
-  void vec_mul_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c, int num_threads);
+  void vec_mul_parallel(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c, int num_threads);
 
-  void vec_mul_unrolled8_scalarized_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c, int num_threads);
+  void vec_mul_unrolled8_scalarized_parallel(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c, int num_threads);
 
-  void vec_mul_unrolled_avx_parallel(std::vector<float> a, std::vector<float> b, std::vector<float>& c, int num_threads);
+  void vec_mul_unrolled_avx_parallel(const std::vector<float>& a, const std::vector<float>& b, std::vector<float>& c, int num_threads);
 }
 
 #endif //VECTORIZATION_VEC_MUL_H
