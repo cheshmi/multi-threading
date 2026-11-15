@@ -4,6 +4,7 @@
 #SBATCH --export=ALL
 #SBATCH --job-name="mt"
 #SBATCH --nodes=1
+#SBATCH --exclusive
 #SBATCH --output="mt.%j.%N.out"
 #SBATCH -t 00:25:00
 ##################### SLURM (do not change) ^  #####################
